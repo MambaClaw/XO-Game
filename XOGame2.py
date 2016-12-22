@@ -18,8 +18,8 @@ class MyApplication(arcade.Window):
 
     def __init__(self, width, height):
         self.TURN = 0
-        self.Player1Wins = False
-        self.Player2Wins = False
+        self.player1Wins = False
+        self.player2Wins = False
         """
         Set up the application.
         """
@@ -45,16 +45,16 @@ class MyApplication(arcade.Window):
         arcade.start_render()
 
         # Draw the grid
-        
+
         for row in range(3):
             for column in range(3):
                 # Figure out what color to draw the box
                 if self.Matrix[row][column] == 1:
-                    color = arcade.color.GREEN
+                    color = arcade.color.BLACK
                 elif self.Matrix[row][column] == 2:
-                    color = arcade.color.YELLOW
-                else:
                     color = arcade.color.WHITE
+                else:
+                    color = arcade.color.GRAY
 
                 # Do the math to figure out where the box is
                 x = (MARGIN + WIDTH) * column + MARGIN + WIDTH // 2
@@ -62,6 +62,19 @@ class MyApplication(arcade.Window):
 
                 # Draw the box
                 arcade.draw_rectangle_filled(x, y, WIDTH, HEIGHT, color)
+                if self.player1Wins :
+                    self.gameOver = arcade.Sprite('images/player1Wins.jpg')
+                    self.gameOver.set_position(300, 300)
+                    self.gameOver.draw()
+                elif self.player2Wins :
+                    self.gameOver = arcade.Sprite('images/player2Wins.jpg')
+                    self.gameOver.set_position(300, 300)
+                    self.gameOver.draw()
+                elif(self.TURN == 9 and self.player1Wins == False and self.player2Wins == False):
+                    self.gameOver = arcade.Sprite('images/draw.jpg')
+                    self.gameOver.set_position(600, 600)
+                    self.gameOver.draw()
+
     def on_mouse_press(self, x, y, button, modifiers):
         """
         Called when the user presses a mouse button.
@@ -83,40 +96,44 @@ class MyApplication(arcade.Window):
 
         if(self.Matrix[0][0] == 1 and self.Matrix[0][1] == 1 and self.Matrix[0][2] == 1):
             self.player1Wins = True
-        if(self.Matrix[1][0] == 1 and self.Matrix[1][1] == 1 and self.Matrix[1][2] == 1):
+        elif(self.Matrix[1][0] == 1 and self.Matrix[1][1] == 1 and self.Matrix[1][2] == 1):
             self.player1Wins = True
-        if(self.Matrix[2][0] == 1 and self.Matrix[2][1] == 1 and self.Matrix[2][2] == 1):
+        elif(self.Matrix[2][0] == 1 and self.Matrix[2][1] == 1 and self.Matrix[2][2] == 1):
             self.player1Wins = True
-        if(self.Matrix[0][0] == 1 and self.Matrix[1][0] == 1 and self.Matrix[2][0] == 1):
+        elif(self.Matrix[0][0] == 1 and self.Matrix[1][0] == 1 and self.Matrix[2][0] == 1):
             self.player1Wins = True
-        if(self.Matrix[0][1] == 1 and self.Matrix[1][1] == 1 and self.Matrix[2][1] == 1):
+        elif(self.Matrix[0][1] == 1 and self.Matrix[1][1] == 1 and self.Matrix[2][1] == 1):
             self.player1Wins = True
-        if(self.Matrix[0][2] == 1 and self.Matrix[1][2] == 1 and self.Matrix[2][2] == 1):
+        elif(self.Matrix[0][2] == 1 and self.Matrix[1][2] == 1 and self.Matrix[2][2] == 1):
             self.player1Wins = True
-        if(self.Matrix[0][0] == 1 and self.Matrix[1][1] == 1 and self.Matrix[2][2] == 1):
+        elif(self.Matrix[0][0] == 1 and self.Matrix[1][1] == 1 and self.Matrix[2][2] == 1):
             self.player1Wins = True
-        if(self.Matrix[0][2] == 1 and self.Matrix[1][1] == 1 and self.Matrix[2][0] == 1):
+        elif(self.Matrix[0][2] == 1 and self.Matrix[1][1] == 1 and self.Matrix[2][0] == 1):
             self.player1Wins = True
-            
+        else: self.player1Wins = False
+
         if(self.Matrix[0][0] == 2 and self.Matrix[0][1] == 2 and self.Matrix[0][2] == 2):
             self.player2Wins = True
-        if(self.Matrix[1][0] == 2 and self.Matrix[1][1] == 2 and self.Matrix[1][2] == 2):
+        elif(self.Matrix[1][0] == 2 and self.Matrix[1][1] == 2 and self.Matrix[1][2] == 2):
             self.player2Wins = True
-        if(self.Matrix[2][0] == 2 and self.Matrix[2][1] == 2 and self.Matrix[2][2] == 2):
+        elif(self.Matrix[2][0] == 2 and self.Matrix[2][1] == 2 and self.Matrix[2][2] == 2):
             self.player2Wins = True
-        if(self.Matrix[0][0] == 2 and self.Matrix[1][0] == 2 and self.Matrix[2][0] == 2):
+        elif(self.Matrix[0][0] == 2 and self.Matrix[1][0] == 2 and self.Matrix[2][0] == 2):
             self.player2Wins = True
-        if(self.Matrix[0][1] == 2 and self.Matrix[1][1] == 2 and self.Matrix[2][1] == 2):
+        elif(self.Matrix[0][1] == 2 and self.Matrix[1][1] == 2 and self.Matrix[2][1] == 2):
             self.player2Wins = True
-        if(self.Matrix[0][2] == 2 and self.Matrix[1][2] == 2 and self.Matrix[2][2] == 2):
+        elif(self.Matrix[0][2] == 2 and self.Matrix[1][2] == 2 and self.Matrix[2][2] == 2):
             self.player2Wins = True
-        if(self.Matrix[0][0] == 2 and self.Matrix[1][1] == 2 and self.Matrix[2][2] == 2):
+        elif(self.Matrix[0][0] == 2 and self.Matrix[1][1] == 2 and self.Matrix[2][2] == 2):
             self.player2Wins = True
-        if(self.Matrix[0][2] == 2 and self.Matrix[1][1] == 2 and self.Matrix[2][0] == 2):
+        elif(self.Matrix[0][2] == 2 and self.Matrix[1][1] == 2 and self.Matrix[2][0] == 2):
             self.player2Wins = True
-        if self.Player1Wins == True: print("Player1 Wins")
-        elif self.Player2Wins : print("Player2 Wins")
+        else: self.player2Wins = False
+
         print (self.Matrix)
+        print (self.player1Wins)
+        print (self.player2Wins)
+        print (self.TURN)
 
 
 window = MyApplication(SCREEN_WIDTH, SCREEN_HEIGHT)
