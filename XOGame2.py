@@ -72,10 +72,6 @@ class MyApplication(arcade.Window):
             self.Matrix[row][column] = BLUE
             self.TURN += 1
 
-        checkPlayer1Wins(self)
-        checkPlayer2Wins(self)
-
-    def checkPlayer1Wins(self):
         if(self.Matrix[0][0] == 1 and self.Matrix[0][1] == 1 and self.Matrix[0][2] == 1):
             self.player1Wins = True
         elif(self.Matrix[1][0] == 1 and self.Matrix[1][1] == 1 and self.Matrix[1][2] == 1):
@@ -94,7 +90,6 @@ class MyApplication(arcade.Window):
             self.player1Wins = True
         else: self.player1Wins = False
 
-    def checkPlayer2Wins(self):
         if(self.Matrix[0][0] == 2 and self.Matrix[0][1] == 2 and self.Matrix[0][2] == 2):
             self.player2Wins = True
         elif(self.Matrix[1][0] == 2 and self.Matrix[1][1] == 2 and self.Matrix[1][2] == 2):
