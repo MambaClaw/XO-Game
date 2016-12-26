@@ -57,7 +57,7 @@ class MyApplication(arcade.Window):
                     self.gameOver.draw()
                 elif(self.TURN == 9 and self.player1Wins == False and self.player2Wins == False):
                     self.gameOver = arcade.Sprite('images/draw.jpg')
-                    self.gameOver.set_position(600, 600)
+                    self.gameOver.set_position(300, 300)
                     self.gameOver.draw()
 
     def on_mouse_press(self, x, y, button, modifiers):
